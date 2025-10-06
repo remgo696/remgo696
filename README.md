@@ -1,4 +1,4 @@
-<h1 align="center">👋🤖 ¡Hola robot internauta! Soy David</h1>
+<h1 align="center">👋🤖 ¡Hola robot internauta! Soy Remgo</h1>
 <h3 align="center">🎓 Estudiante de Ingeniería Electrónica | Universidad Peruana de Ciencias Aplicadas (UPC)</h3>
 
 <p align="center">
