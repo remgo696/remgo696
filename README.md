@@ -1,16 +1,70 @@
-## Hi there 👋
+# 👋🤖 ¡Hola robot internauta! Soy David
 
+### 🎓 Estudiante de Ingeniería Electrónica | Universidad Peruana de Ciencias Aplicadas (UPC)
+
+Actualmente curso el **quinto año** de carrera, apasionado por la intersección entre **automatización industrial**, **redes de comunicación** y **domótica**. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
+
+---
+
+## 🔧 Áreas de Especialización
+
+- **Automatización Industrial**: Diseño y programación de sistemas de control para procesos industriales
+- **Programación de PLCs**: Experiencia en **Siemens** (TIA Portal, STEP 7)
+- **Redes de Comunicación Industrial**: Profinet, Modbus TCP/IP, OPC UA
+<!--- **Domótica y IoT**: Integración de dispositivos inteligentes y protocolos de comunicación (MQTT, KNX)-->
+- **Sistemas Embebidos**: [PIC18F5Q43](https://www.microchip.com/en-us/product/pic18f57q43)
+
+---
+
+## 💻 Stack Tecnológico
+
+### Lenguajes de Programación
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![C](https://img.shields.io/badge/-C-A8B9CC?style=flat-square&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
+![Ladder Logic](https://img.shields.io/badge/-Ladder_Logic-009999?style=flat-square)
+
+### Herramientas y Plataformas
+- **Siemens TIA Portal y STEP 7**: Programación de PLCs S7-1200, configuración de redes Profinet
+- **MPLAB X IDE**: Programación de microcontroladores de Microchip
+
+## 📚 Proyectos Destacados
 <!--
-**remgo696/remgo696** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+### 🏠 [Sistema Domótico Modular](https://github.com/remgo696/domotica-modular)
+> Plataforma de automatización residencial basada en microcontroladores
+- **Tecnologías**: ESP32, MQTT, Node-RED, Home Assistant
+- **Características**: Control de iluminación, climatización, seguridad
+- **Enfoque**: Diseño escalable, interoperabilidad entre protocolos
 -->
+
+### 📄[ETL-UPC-Syllabus](https://github.com/remgo696/ETL-UPC-Syllabus)
+> ETL de los sílabos en PDF de cursos de la UPC con python🐍
+- **Librerias**: pdfplumber, reportlab
+- **Enfoque**: Diseño escalable y modular, separando l. 
+
+
+---
+
+## 📊 Estadísticas de GitHub
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=remgo696&show_icons=true&theme=tokyonight&hide_border=true)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=remgo696&layout=compact&theme=tokyonight&hide_border=true)
+
+---
+
+## 🎯 Objetivos Actuales
+
+<!--- 📖 Profundizar en **arquitecturas de sistemas distribuidos** aplicadas a automatización
+- 🔧 Certificación en **Siemens TIA Portal** (TIA-PORTAL-PRO-1)-->
+- 🌐 Certificación CCNA
+- 💾 Ser un data engineer
+
+---
+
+## 📫 Contacto
+
+- 📧 **Email**: [dvladimirdm@hotmail.com](mailto:dvladimirdm@hotmail.com)
+- 💼 **LinkedIn**: [linkedin.com/in/david-díaz-malca](https://www.linkedin.com/in/david-d%C3%ADaz-malca/)
+
