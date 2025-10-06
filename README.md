@@ -1,21 +1,12 @@
-<table>
-<tr>
-<td width="70%">
+<h1 align="center">👋🤖 ¡Hola robot internauta! Soy David</h1>
+<h3 align="center">🎓 Estudiante de Ingeniería Electrónica | Universidad Peruana de Ciencias Aplicadas (UPC)</h3>
 
-# 👋🤖 ¡Hola robot internauta! Soy David
-
-### 🎓 Estudiante de Ingeniería Electrónica | Universidad Peruana de Ciencias Aplicadas (UPC)
-
-Actualmente curso el **quinto año** de carrera, apasionado por la intersección entre **automatización industrial**, **redes de comunicación** y **domótica**. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
-
-</td>
-<td width="30%" align="right">
-
-<img src="remgo_walking.gif" width="200" alt="Remgo walking animation"/>
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <img src="remgo_walking.gif" width="200" alt="Remgo walking animation"/>
+</p>
+<p align="center">
+Actualmente curso el <b>quinto año</b> de carrera, apasionado por la intersección entre <b>automatización industrial</b>, <b>redes de comunicación</b> y <b>domótica</b>. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
+</p>
 
 ---
 
