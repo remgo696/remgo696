@@ -1,8 +1,21 @@
+<table>
+<tr>
+<td width="70%">
+
 # 👋🤖 ¡Hola robot internauta! Soy David
 
 ### 🎓 Estudiante de Ingeniería Electrónica | Universidad Peruana de Ciencias Aplicadas (UPC)
 
 Actualmente curso el **quinto año** de carrera, apasionado por la intersección entre **automatización industrial**, **redes de comunicación** y **domótica**. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
+
+</td>
+<td width="30%" align="right">
+
+<img src="remgo_walking.gif" width="200" alt="Remgo walking animation"/>
+
+</td>
+</tr>
+</table>
 
 ---
 
