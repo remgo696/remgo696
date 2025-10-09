@@ -33,20 +33,13 @@ Actualmente curso el <b>quinto año</b> de carrera, apasionado por la intersecci
 - **MPLAB X IDE**: Programación de microcontroladores de Microchip
 
 ## 📚 Proyectos Destacados
-<!--
-
-### 🏠 [Sistema Domótico Modular](https://github.com/remgo696/domotica-modular)
-> Plataforma de automatización residencial basada en microcontroladores
-- **Tecnologías**: ESP32, MQTT, Node-RED, Home Assistant
-- **Características**: Control de iluminación, climatización, seguridad
-- **Enfoque**: Diseño escalable, interoperabilidad entre protocolos
--->
 
 ### 📄[ETL-UPC-Syllabus](https://github.com/remgo696/ETL-UPC-Syllabus)
-> ETL de los sílabos en PDF de cursos de la UPC con python🐍
-- **Librerias**: pdfplumber, reportlab
-- **Enfoque**: Diseño escalable y modular, separando l. 
-
+> Pipeline ETL desarrollado en Python 🐍 para conseguir información estructurada desde los sílabos en PDF de la UPC.
+- **Librerias principales**: pdfplumber, reportlab, re, json, configparser
+- **Enfoque**: Arquitectura escalable y modular, con separación clara entre las fases Extract, Transform y Load.
+- **Objetivo:** Estandarizar y limpiar datos académicos (información general, unidades de aprendizaje, evaluaciones) para su posterior análisis o uso en aplicaciones inteligentes.
+- **Diseño:** Basado en clases (`Course`, `Unit`, `Exam`, `SyllabusRaw`) que representan la **semántica de negocio** del dominio educativo.
 
 ---
 
