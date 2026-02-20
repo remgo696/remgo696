@@ -16,7 +16,7 @@ Actualmente curso el <b>sexto año</b> de carrera, apasionado por la intersecci�
 - **Programación de PLCs**: Experiencia en **Siemens** (TIA Portal, STEP 7)
 - **Redes de Comunicación Industrial**: Profinet, Modbus TCP/IP, OPC UA
 <!--- **Domótica y IoT**: Integración de dispositivos inteligentes y protocolos de comunicación (MQTT, KNX)-->
-- **Sistemas Embebidos**: [PIC18F57Q43](https://www.microchip.com/en-us/product/pic18f57q43), [PIC18F47Q10](https://www.microchip.com/en-us/product/pic18f47q10)
+- **Sistemas Embebidos**: [PIC18F57Q43](https://www.microchip.com/en-us/product/PIC18F57Q43), [PIC18F47Q10](https://www.microchip.com/en-us/product/PIC18F47Q10)
 
 ---
 
@@ -45,9 +45,9 @@ Actualmente curso el <b>sexto año</b> de carrera, apasionado por la intersecci�
 
 ## 📊 Estadísticas de GitHub
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=remgo696&show_icons=true&theme=tokyonight&hide_border=true)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=remgo696&show_icons=true&theme=tokyonight&hide_border=true&cache_seconds=86400)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=remgo696&layout=compact&theme=tokyonight&hide_border=true)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=remgo696&layout=compact&theme=tokyonight&hide_border=true&cache_seconds=86400)
 
 ---
 
