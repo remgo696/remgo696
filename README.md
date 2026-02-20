@@ -5,7 +5,7 @@
   <img src="remgo_walking.gif" width="200" alt="Remgo walking animation"/>
 </p>
 <p align="center">
-Actualmente curso el <b>quinto año</b> de carrera, apasionado por la intersección entre <b>automatización industrial</b>, <b>redes de comunicación</b> y <b>domótica</b>. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
+Actualmente curso el <b>sexto año</b> de carrera, apasionado por la intersección entre <b>automatización industrial</b>, <b>redes de comunicación</b> e <b>inmótica</b>. Mi enfoque está en desarrollar soluciones robustas y escalables para sistemas embebidos e industriales.
 </p>
 
 ---
@@ -16,7 +16,7 @@ Actualmente curso el <b>quinto año</b> de carrera, apasionado por la intersecci
 - **Programación de PLCs**: Experiencia en **Siemens** (TIA Portal, STEP 7)
 - **Redes de Comunicación Industrial**: Profinet, Modbus TCP/IP, OPC UA
 <!--- **Domótica y IoT**: Integración de dispositivos inteligentes y protocolos de comunicación (MQTT, KNX)-->
-- **Sistemas Embebidos**: [PIC18F5Q43](https://www.microchip.com/en-us/product/pic18f57q43)
+- **Sistemas Embebidos**: [PIC18F57Q43](https://www.microchip.com/en-us/product/pic18f57q43), [PIC18F47Q10](https://www.microchip.com/en-us/product/pic18f47q10)
 
 ---
 
