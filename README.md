@@ -41,6 +41,39 @@ Actualmente curso el <b>sexto año</b> de carrera, apasionado por la intersecci�
 - **Objetivo:** Estandarizar y limpiar datos académicos (información general, unidades de aprendizaje, evaluaciones) para su posterior análisis o uso en aplicaciones inteligentes.
 - **Diseño:** Basado en clases (`Course`, `Unit`, `Exam`, `SyllabusRaw`) que representan la **semántica de negocio** del dominio educativo.
 
+### 📖 [TheAssemblyChronicles-PIC](https://github.com/remgo696/TheAssemblyChronicles-PIC)
+> Guía técnica de referencia para microcontroladores PIC18F57Q43 y PIC18F47Q10 en Assembly y C.
+- **Stack**: MkDocs, Python, C, Assembly | Desplegado en GitHub Pages con CI/CD vía GitHub Actions ([Link](https://remgo696.github.io/TheAssemblyChronicles-PIC/))
+- **Contenido**: Arquitectura del PIC18F, manejo de memoria, interrupciones, periféricos (timers, LCD1602) y proyectos funcionales
+- **Enfoque**: Documentación orientada al aprendizaje para estudiantes de Ingeniería Electrónica, Mecatrónica y Biomédica de la UPC
+- **Proyectos incluidos**: Termómetro digital, reloj 24H/12H, fading LED, control de intensidad con encoder rotativo
+
+---
+
+## 🔌 Proyectos con PIC18F47Q10
+
+### 🌡️ [PIC18F47Q10-Thermometer-EUSART](https://github.com/remgo696/PIC18F47Q10-Thermometer-EUSART)
+> Termómetro digital con sensor DHT22, LCD 16×2 y transmisión serial vía EUSART2.
+- Lee temperatura y humedad, permite alternar entre °C y °F mediante interrupción externa (INT0)
+- Conversión °C→°F con aritmética entera, sin punto flotante
+
+### ⏰ [PIC18F47Q10-Clock24H12H](https://github.com/remgo696/PIC18F47Q10-Clock24H12H)
+> Reloj digital con formato HH:MM:SS:CC, modos 24H/12H y alarma configurable.
+- Base de tiempo precisa de 10 ms usando TMR1 + CCP1 en modo comparación con interrupciones de doble prioridad
+- Máquina de estados con detección de pulsación larga (2s) y timeout de inactividad (6s)
+- Interfaz con 3 botones (UP, MODE, DOWN) mediante IOC y LCD 16×2
+
+### 💡 [PIC18F47Q10-FadingLED](https://github.com/remgo696/PIC18F47Q10-FadingLED)
+> Efecto de desvanecimiento/reaparición suave de LED usando PWM por hardware en la Curiosity Nano.
+- CCP1 en modo PWM; TMR0 genera interrupciones a ~120 Hz para ajustar brillo gradualmente
+- Ciclo completo de fade en ~1.7 segundos
+
+### 🎛️ [PIC18F47Q10-LEDIntensityControl-LCD16x2-KY040](https://github.com/remgo696/PIC18F47Q10-LEDIntensityControl-LCD16x2-KY040)
+> Dimmer de LED controlado por encoder rotativo KY-040 con visualización en LCD 16×2.
+- PWM3 a 5 kHz con ajuste de intensidad en incrementos de 2%, mostrado en tiempo real en el LCD
+- Arquitectura interrupt-driven: TMR0 muestrea el encoder con debounce, el main loop actualiza PWM y display
+- Oscilador a 4 MHz, prescaler 1:4 en TMR0 para sampling a ~1.2 kHz
+
 ---
 
 ## 📊 Estadísticas de GitHub
