@@ -141,7 +141,45 @@ def h2(ax):
     dim(ax, T(W, 0), T(W, cy), f(cy), 5, vert=True, fs=4.6)
     ax.text(*T(W / 2, -16), "4   TAPA DE ABAJO — 1 unidad — escala 1:1.5", fontsize=7.5, ha="center", weight="bold")
 
+def h3(ax):
+    ax.text(105, 276, "TOLVA DE MDF — NOTAS DE CORTE Y ARMADO", fontsize=10, ha="center", weight="bold")
+    material(ax)
+    cols = [16, 46, 60, 122]
+    filas = [("Pieza", "Cant.", "Medidas [mm]", "Uniones"),
+             ("1 TAPA", "2", "140 ancho (con lengüetas) x 150 alto;\ncuerpo 130; base 50; caras a 51.3°",
+              "4 lengüetas de 5 x 22 a PARED;\n4 ranuras de 18.1 x 3.1 p/ INCL;\n1 ranura de 14.1 x 3.1 abajo"),
+             ("2 PARED", "2", "130 x 100", "4 ranuras de 22.1 x 3.1\n(reciben las lengüetas de TAPA)"),
+             ("3 INCL", "2", "118 (+2 x 3 lengüetas) = 124\nx 64.03", "4 lengüetas de 3 x 18, entran en las\nranuras inclinadas de TAPA"),
+             ("4 TAPA-ABAJO", "1", "115 x 39, agujero Ø35 centrado", "Se pega bajo la boca de la tolva;\nel agujero va sobre la compuerta")]
+    y = 245
+    for i, fila in enumerate(filas):
+        for c, t in zip(cols, fila): ax.text(c, y, t, fontsize=6.6, va="top", weight="bold" if i == 0 else "normal")
+        y -= 6 if i == 0 else 13
+        ax.plot([15, 195], [y + 2.5] * 2, c="#bbb", lw=0.4)
+    notas = [
+        "Espesor de diseño: T = 3 mm. Holgura de ranuras: 0.1 mm sobre el ancho y el largo de la lengüeta",
+        "(ranuras de 3.1 para MDF de 3; 18.1 para lengüetas de 18; 22.1 para lengüetas de 22).",
+        "Si el MDF real mide distinto, medir con calibrador y ajustar el espesor T en el diseño.",
+        "DXF (tolva.dxf): contiene solo la capa CORTE; todas las líneas se cortan.",
+        "",
+        "Armado (orden recomendado):",
+        "1) TAPA-1 sobre la mesa.",
+        "2) Insertar las dos INCL de canto en sus ranuras inclinadas; sellar el contorno con silicona.",
+        "3) Bajar TAPA-2 sobre los extremos libres de las INCL (las lengüetas de las INCL entran a la vez).",
+        "4) Deslizar las dos PARED lateralmente sobre las lengüetas de las TAPAS. Pegar con cola blanca o",
+        "    cianoacrilato en cada unión; sellar con cinta o silicona las juntas por donde pueda caer frejol.",
+        "5) Pegar la TAPA-ABAJO bajo la boca, con el agujero Ø35 centrado sobre la salida.",
+        "",
+        "Nota: las TAPAS van retranqueadas 3 mm del borde de las PARED (para que las ranuras queden cerradas);",
+        "por eso las INCL miden 124 en total y no 130.",
+        "Nota: las lengüetas de TAPA sobresalen 5 y la PARED mide 3: quedan 2 mm fuera de la pared.",
+        "Nota: la ranura inferior de 14.1 x 3.1 de las TAPAS no recibe ninguna pieza en este diseño",
+        "(la TAPA-ABAJO no tiene lengüetas); puede quedar o eliminarse.",
+    ]
+    for i, t in enumerate(notas): ax.text(16, 178 - i * 6.3, t, fontsize=6.5, weight="bold" if t.startswith("Armado") else "normal")
+
 with PdfPages(OUT + "tolva_planos.pdf") as pdf:
-    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 2, "1:1", 2, h1, material="MDF\ne = 3 mm")
-    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 2, "1:1.5", 5, h2, material="MDF\ne = 3 mm")
+    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 3, "1:1", 2, h1, material="MDF\ne = 3 mm")
+    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 3, "1:1.5", 5, h2, material="MDF\ne = 3 mm")
+    hoja(pdf, "Tolva de MDF: notas\nde corte y armado", "TOL-03", 3, 3, "—", 7, h3, material="MDF\ne = 3 mm")
 print("ok", EXT[2], LAT[2], INC[2], ABA[2], (cx, cy, RH))
