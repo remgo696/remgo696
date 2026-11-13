@@ -18,8 +18,9 @@ AV = "PARA REVISIÓN — NO APTO PARA CORTE"
 DL = 5.0; LX = [65.0, 165.0]; LY = [170.0, 152.0]
 # ---- módulos (x0, y0 = esquina inferior izquierda). Agujeros relativos a esa esquina.
 MODS = [
-    dict(n="XL4015", x=60, y=112, w=44, h=21, z=None, d=3.4,          # 2 agujeros en diagonal a 37 entre centros
-         holes=[(4.5, 4.5), (39.5, 16.5)], fuente="medido: 44 x 21, 2 agujeros Ø3 en diagonal a 37 (35 x 12, a 4.5 de los bordes)"),
+    dict(n="XL4015", x=60, y=112, w=44, h=21, z=None, d=3.4,          # 2 agujeros en diagonal (IN+ arriba izq., OUT- abajo der.)
+         holes=[(6.8, 18.2), (37.2, 2.8)],
+         fuente="44 x 21, 2 agujeros Ø3 en diagonal a 30.4 x 15.4 entre centros (foto; 37 medido por fuera de los agujeros)"),
     dict(n="L298N", x=118, y=100, w=43, h=43, z=28, d=3.4,
          holes=[(3, 3), (40, 3), (3, 40), (40, 40)], fuente="43 x 43 x 28, agujeros Ø3 a 37 x 37 (Makerguides; I-CubeX; Ø3 medido)"),
     dict(n="XL4016", x=20, y=36, w=64, h=47, z=26, d=3.4,
