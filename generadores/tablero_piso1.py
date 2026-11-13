@@ -25,7 +25,8 @@ MODS = [
     dict(n="XL4016", x=20, y=36, w=64, h=47, z=26, d=3.4,
          holes=[(1.5, 1.5), (62.5, 1.5), (1.5, 45.5), (62.5, 45.5)], fuente="medido: 64 x 47, 4 agujeros Ø3 en rectángulo 61 x 44; alto 26 (Envistia)"),
     dict(n="PCA9685", x=140, y=55, w=62.5, h=25, z=3, d=3.4,
-         holes=[], fuente="medido: 62.5 x 25, 4 agujeros Ø3 — POSICIÓN POR MEDIR"),
+         holes=[((62.5 - 55.88) / 2 + dx, (25 - 19.05) / 2 + dy) for dy in (0, 19.05) for dx in (0, 55.88)],
+         fuente="medido: 62.5 x 25, 4 agujeros Ø3; separación 55.88 x 19.05 de la referencia Adafruit 815 (EAGLE) — VERIFICAR"),
 ]
 X3 = dict(n="X3", x=20, y=8, w=85, h=18, lab=["+24V", "0V", "+12V", "0VM", "+5V", "0VS", "MA", "MB"])
 X4 = dict(n="X4", x=125, y=8, w=85, h=18, lab=["3V3", "GND", "SDA", "SCL", "IN1", "IN2", "ENA", "RES"])
@@ -109,7 +110,7 @@ def s2(ax):
     for n, x, y, d, _ in HOLES: ax.text(*P(x + 3, y + 2.5), n, fontsize=4.2)
     dim(ax, P(0, BH), P(BW, BH), "230", 8); dim(ax, P(BW, 0), P(BW, BH), "180", 8, vert=True)
     rows = [("ID", "X", "Y", "Ø", "Elemento")] + [(n, f"{x:.2f}", f"{y:.2f}", f"{d:g}", e) for n, x, y, d, e in HOLES]
-    rows += [("—", "—", "—", "—", "PCA9685: 4 agujeros Ø3 — posición POR MEDIR"),
+    rows += [("—", "—", "—", "—", "P1–P4: separación según Adafruit 815 — verificar con la placa"),
              ("—", "—", "—", "—", "X3 / X4: fijación POR CONFIRMAR (modelo de bornera)")]
     cx = [16, 30, 48, 66, 78]; y0 = 141
     for i, r in enumerate(rows):
