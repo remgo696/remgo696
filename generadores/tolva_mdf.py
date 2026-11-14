@@ -25,6 +25,18 @@ def pieza(contorno):
 outer = sorted([p for p in polys if not any(q is not p and inside(p, bb(q)) for q in polys)], key=lambda P: bb(P)[0] + 1000 * (bb(P)[1] > 150))
 EXT, LAT, INC = pieza(outer[0]), pieza(outer[2]), pieza(outer[4])          # una de cada par
 ABA = pieza(outer[6])
+
+def corregir_tapa(P):
+    C, H, (W, Hh) = P
+    xs = sorted({x for x, _ in C}); x0, xb0, xb1, x1 = xs[0], xs[1], xs[-2], xs[-1]
+    TL = 3.0                                   # lengüeta = espesor del MDF
+    mx = lambda x: (xb0 - TL if x == x0 else xb1 + TL if x == x1 else x) - (xb0 - TL)
+    C2 = [(mx(x), y) for x, y in C]
+    H2 = [[(x - (xb0 - TL), y) for x, y in h] for h in H
+          if not (bb(h)[3] - bb(h)[1] < 4 and bb(h)[2] - bb(h)[0] > 10)]   # quita la ranura horizontal inferior
+    return C2, H2, (xb1 - xb0 + 2 * TL, Hh)
+EXT = corregir_tapa(EXT)
+RAMPA = [(x - 5, y - 5) for x, y in [(e[0], e[1]) for e in ezdxf.readfile(sys.argv[2]).modelspace()[0].get_points()]]
 cx, cy = circ.dxf.center.x - bb(outer[6])[0], circ.dxf.center.y - bb(outer[6])[1]; RH = circ.dxf.radius
 
 def dim_al(ax, p1, p2, txt, off, fs=5):
@@ -70,16 +82,10 @@ def h1(ax):
     chain = [0] + ys_side
     for a, b in zip(chain, chain[1:]): dim(ax, T(x1, a), T(x1, b), f(b - a), 6, vert=True, fs=4.8)
     dim(ax, T(x1, 0), T(x1, Hh), f(Hh), 15, vert=True)
-    # ranura horizontal inferior
-    hz = [h for h in H if abs(bb(h)[3] - bb(h)[1]) < 4 and abs(bb(h)[2] - bb(h)[0]) > 10][0]; b = bb(hz)
-    dim(ax, T(b[0], b[3]), T(b[2], b[3]), f(b[2] - b[0]), 4, fs=4.5)
-    dim(ax, T(b[2], b[1]), T(b[2], b[3]), f(b[3] - b[1]), 4, vert=True, fs=4.2)
-    dim(ax, T(b[0], 0), T(b[0], b[1]), f(b[1]), -3, vert=True, fs=4.2)
-    dim(ax, T(bot[0], b[3]), T(b[0], b[3]), f(b[0] - bot[0]), 9, fs=4.2)
     # ranuras inclinadas del lado derecho: cadena a lo largo del borde inclinado
     p0, p1 = (bot[1], 0), (xb1, ys[1])                      # borde inclinado derecho
     L = math.hypot(p1[0] - p0[0], p1[1] - p0[1]); u = ((p1[0] - p0[0]) / L, (p1[1] - p0[1]) / L)
-    sl = [h for h in H if h is not hz and min(x for x, _ in h) > (xb0 + xb1) / 2]
+    sl = [h for h in H if min(x for x, _ in h) > (xb0 + xb1) / 2]
     along = lambda P: sorted((x - p0[0]) * u[0] + (y - p0[1]) * u[1] for x, y in P)
     marks = [0] + sorted(v for h in sl for v in (along(h)[0], along(h)[-1])) + [L]
     for a, c in zip(marks, marks[1:]):
@@ -141,16 +147,33 @@ def h2(ax):
     dim(ax, T(W, 0), T(W, cy), f(cy), 5, vert=True, fs=4.6)
     ax.text(*T(W / 2, -16), "4   TAPA DE ABAJO — 1 unidad — escala 1:1.5", fontsize=7.5, ha="center", weight="bold")
 
+def h_rampa(ax):
+    ax.text(105, 276, "TOLVA — MEDIDAS DE CADA PIEZA (mm)", fontsize=10, ha="center", weight="bold")
+    material(ax)
+    s = 1.2; W, Hh = 124, 60; ox, oy = 105 - W * s / 2, 130
+    T = lambda x, y: (ox + x * s, oy + y * s)
+    poly(ax, RAMPA, ox, oy, s)
+    dim(ax, T(0, Hh), T(W, Hh), "124", 10)
+    dim(ax, T(0, Hh), T(3, Hh), "3", 4, fs=4.5); dim(ax, T(3, 50), T(121, 50), "118", -6)
+    dim(ax, T(37, 0), T(87, 0), "50", -6)
+    dim(ax, T(3, 0), T(37, 0), "34", -6, fs=4.8); dim(ax, T(87, 0), T(121, 0), "34", -6, fs=4.8)
+    dim(ax, T(W, 0), T(W, 50), "50", 6, vert=True); dim(ax, T(W, 50), T(W, Hh), "10", 6, vert=True, fs=4.8)
+    dim(ax, T(W, 0), T(W, Hh), "60", 14, vert=True)
+    ang = math.degrees(math.atan2(50, 34))
+    ax.text(*T(90, 4), f"{ang:.1f}°", fontsize=5.5, color=BLUE)
+    ax.text(*T(W / 2, -18), "5   RAMPA — 1 unidad — escala 1.2:1", fontsize=7.5, ha="center", weight="bold")
+
 def h3(ax):
     ax.text(105, 276, "TOLVA DE MDF — NOTAS DE CORTE Y ARMADO", fontsize=10, ha="center", weight="bold")
     material(ax)
     cols = [16, 46, 60, 122]
     filas = [("Pieza", "Cant.", "Medidas [mm]", "Uniones"),
-             ("1 TAPA", "2", "140 ancho (con lengüetas) x 150 alto;\ncuerpo 130; base 50; caras a 51.3°",
-              "4 lengüetas de 5 x 22 a PARED;\n4 ranuras de 18.1 x 3.1 p/ INCL;\n1 ranura de 14.1 x 3.1 abajo"),
+             ("1 TAPA", "2", "136 ancho (con lengüetas) x 150 alto;\ncuerpo 130; base 50; caras a 51.3°",
+              "4 lengüetas de 3 x 22 a PARED;\n4 ranuras de 18.1 x 3.1 p/ INCL"),
              ("2 PARED", "2", "130 x 100", "4 ranuras de 22.1 x 3.1\n(reciben las lengüetas de TAPA)"),
              ("3 INCL", "2", "118 (+2 x 3 lengüetas) = 124\nx 64.03", "4 lengüetas de 3 x 18, entran en las\nranuras inclinadas de TAPA"),
-             ("4 TAPA-ABAJO", "1", "115 x 39, agujero Ø35 centrado", "Se pega bajo la boca de la tolva;\nel agujero va sobre la compuerta")]
+             ("4 TAPA-ABAJO", "1", "115 x 39, agujero Ø35 centrado", "Se pega bajo la boca de la tolva;\nel agujero va sobre la compuerta"),
+             ("5 RAMPA", "1", "124 (orejas) / 118 cuerpo x 60;\nbase 50; orejas de 3 x 10", "Las orejas apoyan en los cantos\nde las PARED")]
     y = 245
     for i, fila in enumerate(filas):
         for c, t in zip(cols, fila): ax.text(c, y, t, fontsize=6.6, va="top", weight="bold" if i == 0 else "normal")
@@ -169,17 +192,31 @@ def h3(ax):
         "4) Deslizar las dos PARED lateralmente sobre las lengüetas de las TAPAS. Pegar con cola blanca o",
         "    cianoacrilato en cada unión; sellar con cinta o silicona las juntas por donde pueda caer frejol.",
         "5) Pegar la TAPA-ABAJO bajo la boca, con el agujero Ø35 centrado sobre la salida.",
+        "6) Colocar la RAMPA apoyando sus orejas de 3 mm en los cantos de las PARED.",
         "",
         "Nota: las TAPAS van retranqueadas 3 mm del borde de las PARED (para que las ranuras queden cerradas);",
         "por eso las INCL miden 124 en total y no 130.",
-        "Nota: las lengüetas de TAPA sobresalen 5 y la PARED mide 3: quedan 2 mm fuera de la pared.",
-        "Nota: la ranura inferior de 14.1 x 3.1 de las TAPAS no recibe ninguna pieza en este diseño",
-        "(la TAPA-ABAJO no tiene lengüetas); puede quedar o eliminarse.",
     ]
-    for i, t in enumerate(notas): ax.text(16, 178 - i * 6.3, t, fontsize=6.5, weight="bold" if t.startswith("Armado") else "normal")
+    for i, t in enumerate(notas): ax.text(16, 165 - i * 6.3, t, fontsize=6.5, weight="bold" if t.startswith("Armado") else "normal")
 
+F = "14/11/2026"
 with PdfPages(OUT + "tolva_planos.pdf") as pdf:
-    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 3, "1:1", 2, h1, material="MDF\ne = 3 mm")
-    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 3, "1:1.5", 5, h2, material="MDF\ne = 3 mm")
-    hoja(pdf, "Tolva de MDF: notas\nde corte y armado", "TOL-03", 3, 3, "—", 7, h3, material="MDF\ne = 3 mm")
-print("ok", EXT[2], LAT[2], INC[2], ABA[2], (cx, cy, RH))
+    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 4, "1:1", 2, h1, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 4, "1:1.5", 5, h2, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva: rampa", "TOL-03", 3, 4, "1.2:1", 1, h_rampa, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva de MDF: notas\nde corte y armado", "TOL-04", 4, 4, "—", 8, h3, material="MDF\ne = 3 mm", fecha=F)
+
+# ---------- DXF corregido (solo capa CORTE)
+doc = ezdxf.new("R2010", setup=True); doc.units = ezdxf.units.MM; doc.layers.add("CORTE", color=1)
+msp = doc.modelspace()
+def add(P, ox, oy): msp.add_lwpolyline([(ox + x, oy + y) for x, y in P], close=True, dxfattribs={"layer": "CORTE"})
+def pieza_dxf(P, ox, oy):
+    add(P[0], ox, oy)
+    for h in P[1]: add(h, ox, oy)
+for k in range(2): pieza_dxf(EXT, 6 + k * 142, 6)
+for k in range(2): pieza_dxf(LAT, 296 + k * 136, 6)
+for k in range(2): pieza_dxf(INC, 6 + k * 130, 162)
+pieza_dxf(ABA, 266, 162); msp.add_circle((266 + cx, 162 + cy), RH, dxfattribs={"layer": "CORTE"})
+add(RAMPA, 388, 162)
+doc.saveas(OUT + "tolva.dxf")
+print("ok", EXT[2], LAT[2], INC[2], ABA[2])
