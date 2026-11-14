@@ -201,10 +201,15 @@ def h3(ax):
 
 F = "14/11/2026"
 with PdfPages(OUT + "tolva_planos.pdf") as pdf:
-    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 4, "1:1", 2, h1, material="MDF\ne = 3 mm", fecha=F)
-    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 4, "1:1.5", 5, h2, material="MDF\ne = 3 mm", fecha=F)
-    hoja(pdf, "Tolva: rampa", "TOL-03", 3, 4, "1.2:1", 1, h_rampa, material="MDF\ne = 3 mm", fecha=F)
-    hoja(pdf, "Tolva de MDF: notas\nde corte y armado", "TOL-04", 4, 4, "—", 8, h3, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva: tapa de extremo", "TOL-01", 1, 3, "1:1", 2, h1, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva: pared, plancha\ny tapa de abajo", "TOL-02", 2, 3, "1:1.5", 5, h2, material="MDF\ne = 3 mm", fecha=F)
+    hoja(pdf, "Tolva: rampa", "TOL-03", 3, 3, "1.2:1", 1, h_rampa, material="MDF\ne = 3 mm", fecha=F)
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+    fig = plt.figure(figsize=(210 / 25.4, 297 / 25.4)); ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, 210); ax.set_ylim(0, 297); ax.axis("off")
+    ax.add_patch(Rectangle((10, 10), 190, 277, fill=False, lw=1.6))
+    h3(ax); pdf.savefig(fig); plt.close(fig)          # última hoja: sin cajetín
 
 # ---------- DXF corregido (solo capa CORTE)
 doc = ezdxf.new("R2010", setup=True); doc.units = ezdxf.units.MM; doc.layers.add("CORTE", color=1)
